@@ -17,3 +17,19 @@ Thumbs.db
 
 # Environment variables
 .env
+
+# Python specific
+api/.venv/
+api/__pycache__/
+api/*.pyc
+api/*.pyo
+api/*.pyd
+api/.Python
+api/pip-log.txt
+api/.coverage
+api/.pytest_cache/
+api/.mypy_cache/
+
+# Python environment
+api/.env
+api/.env.*

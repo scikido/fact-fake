@@ -1,0 +1,9 @@
+google-generativeai 
+requests 
+textblob
+sentence_transformers
+spacy
+fastapi
+uvicorn
+pydantic
+beautifulsoup4
