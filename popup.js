@@ -1,3 +1,6 @@
+let currentClaimIndex = 0;
+let claimsData = [];
+
 document.getElementById("verifyBtn").addEventListener("click", async () => {
     const query = document.getElementById("queryInput").value.trim();
     if (!query) return;
@@ -11,36 +14,60 @@ document.getElementById("verifyBtn").addEventListener("click", async () => {
         }
 
         const data = await response.json();
-        displayResults(data);
-        drawChart(data);
+        claimsData = data.results;
+        currentClaimIndex = 0;
+        updateDisplay();
     } catch (error) {
         console.error("Error fetching data:", error);
     }
 });
 
-function displayResults(data) {
+function updateDisplay() {
+    if (claimsData.length === 0) return;
+
+    const currentClaim = claimsData[currentClaimIndex];
+    document.getElementById("claimText").textContent = currentClaim.claim;
+
+    displayResults(currentClaim.scores);
+    drawChart(currentClaim.scores);
+}
+
+document.getElementById("prevClaim").addEventListener("click", () => {
+    if (currentClaimIndex > 0) {
+        currentClaimIndex--;
+        updateDisplay();
+    }
+});
+
+document.getElementById("nextClaim").addEventListener("click", () => {
+    if (currentClaimIndex < claimsData.length - 1) {
+        currentClaimIndex++;
+        updateDisplay();
+    }
+});
+
+function displayResults(scores) {
     const container = document.getElementById("resultsContainer");
     container.innerHTML = "";
 
-    data.forEach((item, index) => {
+    scores.forEach((item, index) => {
         const div = document.createElement("div");
         div.classList.add("result-item");
-        div.style.background = `linear-gradient(to right, green ${item.score}%, transparent ${item.score}%)`;
-        div.innerHTML = `<strong>${index + 1}. <a href="${item.link}" target="_blank">${item.link}</a></strong> (Score: ${item.score}%)`;
+        div.style.background = `linear-gradient(to right, green ${item.reliability_score}%, transparent ${item.reliability_score}%)`;
+        div.innerHTML = `<strong>${index + 1}. <a href="${item.link}" target="_blank">${item.link}</a></strong> (Score: ${item.reliability_score}%)`;
         container.appendChild(div);
     });
 
-    container.style.overflowY = "auto"; // Enable scrolling if needed
-    container.style.maxHeight = "300px"; // Prevents overflow
+    container.style.overflowY = "auto";
+    container.style.maxHeight = "300px";
 }
 
-function drawChart(data) {
-    const scores = data.map(item => item.score);
-    const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+function drawChart(scores) {
+    const reliabilityScores = scores.map(item => item.reliability_score);
+    const avgScore = reliabilityScores.reduce((a, b) => a + b, 0) / reliabilityScores.length;
 
     const ctx = document.getElementById("credibilityChart").getContext("2d");
 
-    // Destroy old chart if it exists
     if (window.myChart) {
         window.myChart.destroy();
     }
@@ -48,19 +75,17 @@ function drawChart(data) {
     window.myChart = new Chart(ctx, {
         type: "pie",
         data: {
-            labels: data.map((_, i) => `Source ${i + 1}`),
+            labels: scores.map((_, i) => `Source ${i + 1}`),
             datasets: [{
-                data: scores,
+                data: reliabilityScores,
                 backgroundColor: ["red", "blue", "green", "orange", "purple"]
             }]
         }
     });
 
-    // Remove previous average score if exists
     const existingAvg = document.getElementById("avgScore");
     if (existingAvg) existingAvg.remove();
 
-    // Display average score
     const avgScoreElement = document.createElement("p");
     avgScoreElement.id = "avgScore";
     avgScoreElement.innerHTML = `<strong>Average Score: ${avgScore.toFixed(1)}%</strong>`;
