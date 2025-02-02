@@ -1,13 +1,18 @@
 import requests
 from cred import calculate_reliability_score
 import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-GOOGLE_API_KEY = "AIzaSyCXP6iV_m7bCyki5YX74c40jEgPey0nNV4"
-GOOGLE_CSE_ID = "712c853b1be2c4096"
+# Load environment variables
+load_dotenv()
 
+# Get environment variables
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+GOOGLE_CSE_ID = os.getenv('GOOGLE_CSE_ID')
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyBesv-lQ6600jT2oPe3qKd0kOiH9askIUM")
+genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
 # Google Fact Check Tools API Key
 FACT_CHECK_API_KEY = "AIzaSyCXP6iV_m7bCyki5YX74c40jEgPey0nNV4"
