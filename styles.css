@@ -1,0 +1,42 @@
+body {
+    width: 300px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+#resultsContainer {
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.result-item {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+canvas {
+    width: 100%;
+    height: 150px;
+}
