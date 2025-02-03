@@ -6,8 +6,14 @@ document.getElementById("verifyBtn").addEventListener("click", async () => {
     if (!query) return;
 
     try {
-        const url = `http://54.235.11.31:6969/data?query=${encodeURIComponent(query)}`;
-        const response = await fetch(url, { method: "GET" });
+        const url = `http://127.0.0.1:6969/check_fake_news`;
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ article_text: query })
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -23,8 +29,12 @@ document.getElementById("verifyBtn").addEventListener("click", async () => {
 });
 
 function updateDisplay() {
-    if (claimsData.length === 0) return;
+    if (claimsData.length === 0) {
+        document.getElementById("claimContainer").style.display = "none";
+        return;
+    }
 
+    document.getElementById("claimContainer").style.display = "flex";
     const currentClaim = claimsData[currentClaimIndex];
     document.getElementById("claimText").textContent = currentClaim.claim;
 
@@ -53,7 +63,7 @@ function displayResults(scores) {
     scores.forEach((item, index) => {
         const div = document.createElement("div");
         div.classList.add("result-item");
-        div.style.background = `linear-gradient(to right, green ${item.reliability_score}%, transparent ${item.reliability_score}%)`;
+        div.style.background = `linear-gradient(to right, #34A224 ${item.reliability_score}%, transparent ${item.reliability_score}%)`;
         div.innerHTML = `<strong>${index + 1}. <a href="${item.link}" target="_blank">${item.link}</a></strong> (Score: ${item.reliability_score}%)`;
         container.appendChild(div);
     });

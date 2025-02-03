@@ -15,6 +15,7 @@ Thumbs.db
 .vscode/
 .idea/
 
+.venv
 # Environment variables
 .env
 *.env

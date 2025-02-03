@@ -1,21 +1,27 @@
 body {
-    width: 320px;
+    width: 380px;
+    height: auto;
     font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 15px;
+    padding: 1px;
+    margin: 0px;
+
     background-color: #f4f4f9;
     color: #333;
 }
 
 .container {
     display: flex;
+    width: auto;
+    height: auto;
+    padding: 10px;
     flex-direction: column;
     align-items: center;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
+
+   
 }
 
 h2 {
@@ -35,10 +41,10 @@ input {
 button {
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #101468;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 14px;
     transition: background-color 0.3s;
 }
@@ -71,13 +77,16 @@ button:hover {
 }
 
 .result-item {
-    padding: 10px;
+    padding: 15px;
     margin: 5px 0;
     border-radius: 5px;
     background-color: #e9ecef;
     transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgb(157, 138, 138);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
 .result-item:hover {
     background-color: #d6d8db;
 }

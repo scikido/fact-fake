@@ -11,7 +11,7 @@ class ArticleRequest(BaseModel):
     article_text: str
 
 # FastAPI endpoint for checking fake news
-@app.get("/check_fake_news")
+@app.post("/check_fake_news")
 async def check_fake_news(request: ArticleRequest):
     try:
         # Calling the detect_fake_news function from the fake_news_detector.py file
