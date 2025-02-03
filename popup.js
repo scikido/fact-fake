@@ -6,7 +6,7 @@ document.getElementById("verifyBtn").addEventListener("click", async () => {
     if (!query) return;
 
     try {
-        const url = `http://127.0.0.1:6969/check_fake_news`;
+        const url = `http://127.0.0.1:8000/check_fake_news`;
         const response = await fetch(url, {
             method: "POST",
             headers: {

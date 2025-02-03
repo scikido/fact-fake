@@ -2,9 +2,19 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from app import detect_fake_news
+from fastapi.middleware.cors import CORSMiddleware
 
 # FastAPI app instance
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Request model to capture article text
 class ArticleRequest(BaseModel):
