@@ -1,5 +1,8 @@
 # Fact/Fake Verifier Chrome Extension
 
+![alt text](https://i.postimg.cc/YSHwpXFC/Screenshot-2025-02-02-at-11-27-29-PM.png)
+
+
 A Chrome extension that helps users verify the credibility of information by analyzing claims and checking them against reliable sources.
 
 ## Features
