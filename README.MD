@@ -14,6 +14,8 @@ A Chrome extension that helps users verify the credibility of information by ana
 - Visual representation of credibility scores
 - Support for multiple claims analysis
 
+[Watch Demo Video Here](https://youtu.be/7qYJCaGlB6Y?feature=shared)
+
 ## Technology Stack
 
 - **Frontend**: HTML, CSS, JavaScript
